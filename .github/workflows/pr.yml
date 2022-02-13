@@ -36,7 +36,7 @@ jobs:
         id: cache
         with:
           path: .venv
-          key: venv-${{ steps.full-python-version.outputs.version }}-${{ hashFiles('**/poetry.lock') }}o
+          key: venv-${{ steps.full-python-version.outputs.version }}-${{ hashFiles('**/poetry.lock') }}
 
       - name: Ensure cache is healthy
         if: steps.cache.outputs.cache-hit == 'true'
