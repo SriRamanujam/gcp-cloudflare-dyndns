@@ -21,28 +21,36 @@ if __name__ == "__main__":
     # Let's go get our secret token from GCP using the info provided
     # in the environ.
     try:
-        cloudflare_token_secret = config["CF_API_TOKEN_SECRET"]
+        cloudflare_token_secret = config["CF_API_SECRET_NAME"]
     except KeyError:
-        logging.error("No Cloudflare API token was provided.")
+        logging.error("No Cloudflare API secret name was provided.")
         sys.exit(1)
 
     secret_client = secretmanager.SecretManagerServiceClient()
     response = secret_client.access_secret_version(request=cloudflare_token_secret)
 
-    cf_api_token = response.payload.data.decode("UTF-8")
+    try:
+        cf_api_info = json.loads(response.payload.data.decode("UTF-8"))
+    except UnicodeDecodeError:
+        logging.exception("Could not decode response payload")
+        sys.exit(1)
+    except json.JSONDecodeError:
+        logging.exception("Invalid JSON object found in secret.")
+        sys.exit(1)
 
     # Now let's make a call to Cloudflare to check the A record it's got for us
     try:
-        zone_id = config["CF_ZONE_ID"]
-        record_id = config["CF_RECORD_ID"]
+        zone_id = cf_api_info["cf_zone_id"]
+        record_id = cf_api_info["cf_record_id"]
+        api_token = cf_api_info["cf_api_token"]
     except KeyError:
         logging.error(
-            "Could not get zone and/or record id. requires CF_ZONE_ID and CF_RECORD_ID to be set."
+            "Malformed JSON in secret. requires cf_api_token, cf_zone_id and cf_record_id to be set."
         )
         sys.exit(1)
 
     headers = {
-        "Authorization": f"Bearer: {cf_api_token}",
+        "Authorization": f"Bearer: {api_token}",
         "Content-Type": "application/json",
     }
     a_record = requests.get(
