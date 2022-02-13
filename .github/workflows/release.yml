@@ -1,0 +1,35 @@
+name: Release
+
+on:
+  push:
+    tags: v[0-9]+.[0-9]+.[0-9]+
+    branches: main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login to registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      -
+        name: Set tag name in environment
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      -
+        name: Set lowercase repository in environment
+        run: echo "REPOSITORY_LOWERCASE=${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: 
+            ghcr.io/${{ env.REPOSITORY_LOWERCASE }}:latest
+            ghcr.io/${{ env.REPOSITORY_LOWERCASE }}:${{ env.RELEASE_VERSION }}
