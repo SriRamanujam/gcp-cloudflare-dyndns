@@ -4,6 +4,10 @@ on:
   pull-request:
     paths-ignore:
       - 'README.rst'
+      - '.gitignore'
+      - '.dockerignore'
+      - 'Dockerfile'
+      - 'LICENSE'
     branches:
       - "main"
 
