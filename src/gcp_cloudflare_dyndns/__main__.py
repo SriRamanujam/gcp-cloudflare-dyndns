@@ -52,7 +52,7 @@ if __name__ == "__main__":
         sys.exit(1)
 
     headers = {
-        "Authorization": f"Bearer: {api_token}",
+        "Authorization": f"Bearer {api_token}",
         "Content-Type": "application/json",
     }
     a_record = requests.get(
@@ -69,7 +69,8 @@ if __name__ == "__main__":
     currently_set_ip = a_record["result"]["content"]
 
     vm_ip = requests.get(
-        "http://169.254.169.254/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip"
+        "http://169.254.169.254/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip",
+        headers={"Metadata-Flavor": "Google"},
     )
 
     try:
