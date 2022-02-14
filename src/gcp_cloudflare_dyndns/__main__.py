@@ -96,5 +96,7 @@ if __name__ == "__main__":
         except:
             logging.exception("Could not set VM IP address")
             sys.exit(1)
+
+        logging.info("IP updated.")
     else:
         logging.info("IP is unchanged.")
