@@ -27,7 +27,7 @@ if __name__ == "__main__":
         sys.exit(1)
 
     secret_client = secretmanager.SecretManagerServiceClient()
-    response = secret_client.access_secret_version(request=cloudflare_token_secret)
+    response = secret_client.access_secret_version(request={"name": cloudflare_token_secret})
 
     try:
         cf_api_info = json.loads(response.payload.data.decode("UTF-8"))
