@@ -6,7 +6,7 @@ authors = ["Sri Ramanujam"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-google-cloud-secret-manager = "^2.11.1"
+google-cloud-secret-manager = "^2.12.1"
 requests = "^2.27.1"
 python-dotenv = "^0.20.0"
 

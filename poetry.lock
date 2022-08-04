@@ -127,14 +127,14 @@ reauth = ["pyu2f (>=0.1.5)"]
 
 [[package]]
 name = "google-cloud-secret-manager"
-version = "2.11.1"
+version = "2.12.1"
 description = "Secret Manager API API client library"
 category = "main"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7"
 
 [package.dependencies]
-google-api-core = {version = ">=1.31.5,<2.0.0 || >2.3.0,<3.0.0dev", extras = ["grpc"]}
+google-api-core = {version = ">=1.32.0,<2.0.0 || >=2.8.0,<3.0.0dev", extras = ["grpc"]}
 grpc-google-iam-v1 = ">=0.12.4,<1.0.0dev"
 proto-plus = ">=1.15.0,<2.0.0dev"
 protobuf = ">=3.19.0,<4.0.0dev"
@@ -415,7 +415,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "a5cdc0498964d9bf9d396a8831eea266a3f5644254126523e711188ee3bf48cc"
+content-hash = "e5b2e3df8ed9a0e738139ec70e7b67b3106fa4befd823fdbc99e4c9a2df0ff4e"
 
 [metadata.files]
 atomicwrites = [
@@ -480,8 +480,8 @@ google-auth = [
     {file = "google_auth-2.6.0-py2.py3-none-any.whl", hash = "sha256:218ca03d7744ca0c8b6697b6083334be7df49b7bf76a69d555962fd1a7657b5f"},
 ]
 google-cloud-secret-manager = [
-    {file = "google-cloud-secret-manager-2.11.1.tar.gz", hash = "sha256:b52cb477c91dc83484fbf81c83807e7e99672c9e22a686be4d9bd4a04c5a6155"},
-    {file = "google_cloud_secret_manager-2.11.1-py2.py3-none-any.whl", hash = "sha256:41c837a583b904a134e65c2347b60009a10ead00dc040db8570b73bc78a6777f"},
+    {file = "google-cloud-secret-manager-2.12.1.tar.gz", hash = "sha256:2c5106a8d8b62ac01da17d8f13243c874b740f7c8306d14c9da9e384cc2ef8b9"},
+    {file = "google_cloud_secret_manager-2.12.1-py2.py3-none-any.whl", hash = "sha256:89d5876266c8467dfb242ddfa07cfb8249bf2c10b597e803fdc1174774d8891a"},
 ]
 googleapis-common-protos = [
     {file = "googleapis-common-protos-1.56.3.tar.gz", hash = "sha256:6f1369b58ed6cf3a4b7054a44ebe8d03b29c309257583a2bbdc064cd1e4a1442"},
